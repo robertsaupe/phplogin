@@ -47,7 +47,7 @@ class Session {
         $_SESSION[$this->prefix]['__auth'] = true;
     }
 
-    public function Set_Loggedin(string $flag = Group::Get_User_Flag()):void {
+    public function Set_Loggedin(string $flag = 'u'):void {
         switch ($flag) {
             case Group::Get_Superadmin_Flag():
                 $this->Set_Superadmin();
