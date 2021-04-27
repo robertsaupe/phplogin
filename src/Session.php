@@ -14,13 +14,14 @@ namespace RobertSaupe\Login;
 
 class Session {
 
-    public function __construct(private string $prefix) {
-        $this->start();
+    public function __construct(private string $prefix, bool $overwrite = false, ?callable $callback = null) {
+        $this->start($overwrite, $callback);
     }
 
-    private function start():void {
+    private function start(bool $overwrite, ?callable $callback):void {
         if (!headers_sent()) {
-            if (isset($_GET['PHPSESSID'])) session_id($_GET['PHPSESSID']);
+            if ($overwrite == true && isset($_GET['PHPSESSID'])) session_id($_GET['PHPSESSID']);
+            if ($callback != null) call_user_func($callback);
             session_start();
         }
         if (empty($_SESSION[$this->prefix])) $_SESSION[$this->prefix] = array();
