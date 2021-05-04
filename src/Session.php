@@ -27,7 +27,7 @@ class Session {
         if (empty($_SESSION[$this->prefix])) $_SESSION[$this->prefix] = array();
     }
 
-    public function Logout():void {
+    public function logout():void {
         $_SESSION[$this->prefix] = array();
     }
 
@@ -38,169 +38,169 @@ class Session {
      * @param mixed $content
      * @return boolean
      */
-    public function Set_Property(string $prop, mixed $content):bool {
+    public function setProperty(string $prop, mixed $content):bool {
         if (str_starts_with($prop, '__')) return false;
         $_SESSION[$this->prefix][$prop] = $content;
         return true;
     }
 
-    private function set_auth():void {
+    private function setAuth():void {
         $_SESSION[$this->prefix]['__auth'] = true;
     }
 
-    public function Set_Loggedin(string $flag = 'u'):void {
+    public function setLoggedin(string $flag = 'u'):void {
         switch ($flag) {
-            case Group::Get_Superadmin_Flag():
-                $this->Set_Superadmin();
+            case Group::getSuperadminFlag():
+                $this->setSuperadmin();
                 break;
-            case Group::Get_Admin_Flag():
-                $this->Set_Admin();
+            case Group::getAdminFlag():
+                $this->setAdmin();
                 break;
-            case Group::Get_Editor_Flag():
-                $this->Set_Editor();
+            case Group::getEditorFlag():
+                $this->setEditor();
                 break;
-            case Group::Get_Writer_Flag():
-                $this->Set_Writer();
+            case Group::getWriterFlag():
+                $this->setWriter();
                 break;
-            case Group::Get_Contributor_Flag():
-                $this->Set_Contributor();
+            case Group::getContributorFlag():
+                $this->setContributor();
                 break;
-            case Group::Get_User_Flag():
+            case Group::getUserFlag():
             default:
-                $this->Set_User();
+                $this->setUser();
                 break;
-            case Group::Get_Guest_Flag():
-                $this->Set_Guest();
+            case Group::getGuestFlag():
+                $this->setGuest();
                 break;
         }
     }
 
-    public function Set_Superadmin():void {
-        $this->set_auth();
-        $_SESSION[$this->prefix]['__group_id'] = Group::Get_Superadmin_ID();
-        $_SESSION[$this->prefix]['__group_flag'] = Group::Get_Superadmin_Flag();
-        $_SESSION[$this->prefix]['__group_name'] = Group::Get_Superadmin_Name();
+    public function setSuperadmin():void {
+        $this->setAuth();
+        $_SESSION[$this->prefix]['__group_id'] = Group::getSuperadminID();
+        $_SESSION[$this->prefix]['__group_flag'] = Group::getSuperadminFlag();
+        $_SESSION[$this->prefix]['__group_name'] = Group::getSuperadminName();
     }
 
-    public function Set_Admin():void {
-        $this->set_auth();
-        $_SESSION[$this->prefix]['__group_id'] = Group::Get_Admin_ID();
-        $_SESSION[$this->prefix]['__group_flag'] = Group::Get_Admin_Flag();
-        $_SESSION[$this->prefix]['__group_name'] = Group::Get_Admin_Name();
+    public function setAdmin():void {
+        $this->setAuth();
+        $_SESSION[$this->prefix]['__group_id'] = Group::getAdminID();
+        $_SESSION[$this->prefix]['__group_flag'] = Group::getAdminFlag();
+        $_SESSION[$this->prefix]['__group_name'] = Group::getAdminName();
     }
 
-    public function Set_Editor():void {
-        $this->set_auth();
-        $_SESSION[$this->prefix]['__group_id'] = Group::Get_Editor_ID();
-        $_SESSION[$this->prefix]['__group_flag'] = Group::Get_Editor_Flag();
-        $_SESSION[$this->prefix]['__group_name'] = Group::Get_Editor_Name();
+    public function setEditor():void {
+        $this->setAuth();
+        $_SESSION[$this->prefix]['__group_id'] = Group::getEditorID();
+        $_SESSION[$this->prefix]['__group_flag'] = Group::getEditorFlag();
+        $_SESSION[$this->prefix]['__group_name'] = Group::getEditorName();
     }
 
-    public function Set_Writer():void {
-        $this->set_auth();
-        $_SESSION[$this->prefix]['__group_id'] = Group::Get_Writer_ID();
-        $_SESSION[$this->prefix]['__group_flag'] = Group::Get_Writer_Flag();
-        $_SESSION[$this->prefix]['__group_name'] = Group::Get_Writer_Name();
+    public function setWriter():void {
+        $this->setAuth();
+        $_SESSION[$this->prefix]['__group_id'] = Group::getWriterID();
+        $_SESSION[$this->prefix]['__group_flag'] = Group::getWriterFlag();
+        $_SESSION[$this->prefix]['__group_name'] = Group::getWriterName();
     }
 
-    public function Set_Contributor():void {
-        $this->set_auth();
-        $_SESSION[$this->prefix]['__group_id'] = Group::Get_Contributor_ID();
-        $_SESSION[$this->prefix]['__group_flag'] = Group::Get_Contributor_Flag();
-        $_SESSION[$this->prefix]['__group_name'] = Group::Get_Contributor_Name();
+    public function setContributor():void {
+        $this->setAuth();
+        $_SESSION[$this->prefix]['__group_id'] = Group::getContributorID();
+        $_SESSION[$this->prefix]['__group_flag'] = Group::getContributorFlag();
+        $_SESSION[$this->prefix]['__group_name'] = Group::getContributorName();
     }
 
-    public function Set_User():void {
-        $this->set_auth();
-        $_SESSION[$this->prefix]['__group_id'] = Group::Get_User_ID();
-        $_SESSION[$this->prefix]['__group_flag'] = Group::Get_User_Flag();
-        $_SESSION[$this->prefix]['__group_name'] = Group::Get_User_Name();
+    public function setUser():void {
+        $this->setAuth();
+        $_SESSION[$this->prefix]['__group_id'] = Group::getUserID();
+        $_SESSION[$this->prefix]['__group_flag'] = Group::getUserFlag();
+        $_SESSION[$this->prefix]['__group_name'] = Group::getUserName();
     }
 
-    public function Set_Guest():void {
-        $this->set_auth();
-        $_SESSION[$this->prefix]['__group_id'] = Group::Get_Guest_ID();
-        $_SESSION[$this->prefix]['__group_flag'] = Group::Get_Guest_Flag();
-        $_SESSION[$this->prefix]['__group_name'] = Group::Get_Guest_Name();
+    public function setGuest():void {
+        $this->setAuth();
+        $_SESSION[$this->prefix]['__group_id'] = Group::getGuestID();
+        $_SESSION[$this->prefix]['__group_flag'] = Group::getGuestFlag();
+        $_SESSION[$this->prefix]['__group_name'] = Group::getGuestName();
     }
 
-    public function Get_Property(string $prop):mixed {
+    public function getProperty(string $prop):mixed {
         return $_SESSION[$this->prefix][$prop];
     }
 
-    public function Get_Group_ID():int|false {
-        if (!$this->Is_Loggedin()) return false;
+    public function getGroupID():int|false {
+        if (!$this->isLoggedin()) return false;
         return $_SESSION[$this->prefix]['__group_id'];
     }
 
-    public function Get_Group_Flag():string|false {
-        if (!$this->Is_Loggedin()) return false;
+    public function getGroupFlag():string|false {
+        if (!$this->isLoggedin()) return false;
         return $_SESSION[$this->prefix]['__group_flag'];
     }
 
-    public function Get_Group_Name():int|false {
-        if (!$this->Is_Loggedin()) return false;
+    public function getGroupName():int|false {
+        if (!$this->isLoggedin()) return false;
         return $_SESSION[$this->prefix]['__group_name'];
     }
 
-    public function Is_Loggedin():bool {
+    public function isLoggedin():bool {
         return (isset($_SESSION[$this->prefix]['__auth']) && $_SESSION[$this->prefix]['__auth'] == true && isset($_SESSION[$this->prefix]['__group_id']) && isset($_SESSION[$this->prefix]['__group_flag']) && isset($_SESSION[$this->prefix]['__group_name'])) ? true : false;
     }
 
-    public function Min_Superadmin():bool {
-        return ($this->Is_Loggedin() && Group::Check_Access_by_Flag($_SESSION[$this->prefix]['__group_flag'], Group::Get_Superadmin_Flag())) ? true : false;
+    public function minSuperadmin():bool {
+        return ($this->isLoggedin() && Group::checkAccessByFlag($_SESSION[$this->prefix]['__group_flag'], Group::getSuperadminFlag())) ? true : false;
     }
 
-    public function Is_Superadmin():bool {
-        return ($this->Is_Loggedin() && $_SESSION[$this->prefix]['__group_flag'] == Group::Get_Superadmin_Flag()) ? true : false;
+    public function isSuperadmin():bool {
+        return ($this->isLoggedin() && $_SESSION[$this->prefix]['__group_flag'] == Group::getSuperadminFlag()) ? true : false;
     }
 
-    public function Min_Admin():bool {
-        return ($this->Is_Loggedin() && Group::Check_Access_by_Flag($_SESSION[$this->prefix]['__group_flag'], Group::Get_Admin_Flag())) ? true : false;
+    public function minAdmin():bool {
+        return ($this->isLoggedin() && Group::checkAccessByFlag($_SESSION[$this->prefix]['__group_flag'], Group::getAdminFlag())) ? true : false;
     }
 
-    public function Is_Admin():bool {
-        return ($this->Is_Loggedin() && $_SESSION[$this->prefix]['__group_flag'] == Group::Get_Admin_Flag()) ? true : false;
+    public function isAdmin():bool {
+        return ($this->isLoggedin() && $_SESSION[$this->prefix]['__group_flag'] == Group::getAdminFlag()) ? true : false;
     }
 
-    public function Min_Editor():bool {
-        return ($this->Is_Loggedin() && Group::Check_Access_by_Flag($_SESSION[$this->prefix]['__group_flag'], Group::Get_Editor_Flag())) ? true : false;
+    public function minEditor():bool {
+        return ($this->isLoggedin() && Group::checkAccessByFlag($_SESSION[$this->prefix]['__group_flag'], Group::getEditorFlag())) ? true : false;
     }
 
-    public function Is_Editor():bool {
-        return ($this->Is_Loggedin() && $_SESSION[$this->prefix]['__group_flag'] == Group::Get_Editor_Flag()) ? true : false;
+    public function isEditor():bool {
+        return ($this->isLoggedin() && $_SESSION[$this->prefix]['__group_flag'] == Group::getEditorFlag()) ? true : false;
     }
 
-    public function Min_Writer():bool {
-        return ($this->Is_Loggedin() && Group::Check_Access_by_Flag($_SESSION[$this->prefix]['__group_flag'], Group::Get_Writer_Flag())) ? true : false;
+    public function minWriter():bool {
+        return ($this->isLoggedin() && Group::checkAccessByFlag($_SESSION[$this->prefix]['__group_flag'], Group::getWriterFlag())) ? true : false;
     }
 
-    public function Is_Writer():bool {
-        return ($this->Is_Loggedin() && $_SESSION[$this->prefix]['__group_flag'] == Group::Get_Writer_Flag()) ? true : false;
+    public function isWriter():bool {
+        return ($this->isLoggedin() && $_SESSION[$this->prefix]['__group_flag'] == Group::getWriterFlag()) ? true : false;
     }
 
-    public function Min_Contributor():bool {
-        return ($this->Is_Loggedin() && Group::Check_Access_by_Flag($_SESSION[$this->prefix]['__group_flag'], Group::Get_Contributor_Flag())) ? true : false;
+    public function minContributor():bool {
+        return ($this->isLoggedin() && Group::checkAccessByFlag($_SESSION[$this->prefix]['__group_flag'], Group::getContributorFlag())) ? true : false;
     }
 
-    public function Is_Contributor():bool {
-        return ($this->Is_Loggedin() && $_SESSION[$this->prefix]['__group_flag'] == Group::Get_Contributor_Flag()) ? true : false;
+    public function isContributor():bool {
+        return ($this->isLoggedin() && $_SESSION[$this->prefix]['__group_flag'] == Group::getContributorFlag()) ? true : false;
     }
 
-    public function Min_User():bool {
-        return ($this->Is_Loggedin() && Group::Check_Access_by_Flag($_SESSION[$this->prefix]['__group_flag'], Group::Get_User_Flag())) ? true : false;
+    public function minUser():bool {
+        return ($this->isLoggedin() && Group::checkAccessByFlag($_SESSION[$this->prefix]['__group_flag'], Group::getUserFlag())) ? true : false;
     }
 
-    public function Is_User():bool {
-        return ($this->Is_Loggedin() && $_SESSION[$this->prefix]['__group_flag'] == Group::Get_User_Flag()) ? true : false;
+    public function isUser():bool {
+        return ($this->isLoggedin() && $_SESSION[$this->prefix]['__group_flag'] == Group::getUserFlag()) ? true : false;
     }
 
-    public function Min_Guest():bool {
-        return ($this->Is_Loggedin() && Group::Check_Access_by_Flag($_SESSION[$this->prefix]['__group_flag'], Group::Get_Guest_Flag())) ? true : false;
+    public function minGuest():bool {
+        return ($this->isLoggedin() && Group::checkAccessByFlag($_SESSION[$this->prefix]['__group_flag'], Group::getGuestFlag())) ? true : false;
     }
 
-    public function Is_Guest():bool {
-        return ($this->Is_Loggedin() && $_SESSION[$this->prefix]['__group_flag'] == Group::Get_Guest_Flag()) ? true : false;
+    public function isGuest():bool {
+        return ($this->isLoggedin() && $_SESSION[$this->prefix]['__group_flag'] == Group::getGuestFlag()) ? true : false;
     }
 
 }

@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.0.0 - 2021-05-04
+- coding standards
+
 ## 2.1.0 - 2021-04-27
 - Session: better secure by default
 - Session: sess_id overload with $_GET['PHPSESSID'] can be enabled with overwrite true

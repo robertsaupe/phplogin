@@ -24,138 +24,138 @@ class Group {
         6 => array('Superadmin', 's')
     );
 
-    public static function Get_Name_by_ID(int $id):string|false {
+    public static function getNameByID(int $id):string|false {
         if (array_key_exists($id, self::LIST)) return self::LIST[$id][0];
         else return false;
     }
 
-    public static function Get_Flag_by_ID(int $id):string|false {
+    public static function getFlagByID(int $id):string|false {
         if (array_key_exists($id, self::LIST)) return self::LIST[$id][1];
         else return false;
     }
 
-    public static function Get_ID_by_Name(string $name):int|false {
+    public static function getIDByName(string $name):int|false {
         foreach(self::LIST as $key=>$value) if ($value[0] == $name) return $key;
         return false;
     }
 
-    public static function Get_ID_by_Flag(string $flag):int|false {
+    public static function getIDByFlag(string $flag):int|false {
         foreach(self::LIST as $key=>$value) if ($value[1] == $flag) return $key;
         return false;
     }
 
-    public static function Get_Name_by_Flag(string $flag):string|false {
-        $id = self::Get_ID_by_Flag($flag);
+    public static function getNameByFlag(string $flag):string|false {
+        $id = self::getIDByFlag($flag);
         if ($id == false) return false;
-        return self::Get_Name_by_ID($id);
+        return self::getNameByID($id);
     }
 
-    public static function Get_Flag_by_Name(string $name):string|false {
-        $id = self::Get_ID_by_Name($name);
+    public static function getFlagByName(string $name):string|false {
+        $id = self::getIDByName($name);
         if ($id == false) return false;
-        return self::Get_Flag_by_ID($id);
+        return self::getFlagByID($id);
     }
 
-    public static function Check_Access_by_ID(int $id, int $min_id_level):bool {
+    public static function checkAccessByID(int $id, int $min_id_level):bool {
         if ( $id >= $min_id_level ) return true;
         else return false;
     }
 
-    public static function Check_Access_by_Flag($flag, $min_flag_level):bool {
-        $id = self::Get_ID_by_Flag($flag);
-        $min_id_level = self::Get_ID_by_Flag($min_flag_level);
+    public static function checkAccessByFlag($flag, $min_flag_level):bool {
+        $id = self::getIDByFlag($flag);
+        $min_id_level = self::getIDByFlag($min_flag_level);
         if (!is_int($id) || !is_int($min_id_level)) return false;
-        return self::Check_Access_by_ID($id, $min_id_level);
+        return self::checkAccessByID($id, $min_id_level);
     }
 
-    public static function Check_Access_by_Name($name, $min_name_level):bool {
-        $id = self::Get_ID_by_Name($name);
-        $min_id_level = self::Get_ID_by_Name($min_name_level);
+    public static function checkAccessByName($name, $min_name_level):bool {
+        $id = self::getIDByName($name);
+        $min_id_level = self::getIDByName($min_name_level);
         if (!is_int($id) || !is_int($min_id_level)) return false;
-        return self::Check_Access_by_ID($id, $min_id_level);
+        return self::checkAccessByID($id, $min_id_level);
     }
 
-    public static function Get_Superadmin_ID():int {
+    public static function getSuperadminID():int {
         return 6;
     }
 
-    public static function Get_Superadmin_Flag():string {
+    public static function getSuperadminFlag():string {
         return self::LIST[6][1];
     }
 
-    public static function Get_Superadmin_Name():string {
+    public static function getSuperadminName():string {
         return self::LIST[6][0];
     }
 
-    public static function Get_Admin_ID():int {
+    public static function getAdminID():int {
         return 5;
     }
 
-    public static function Get_Admin_Flag():string {
+    public static function getAdminFlag():string {
         return self::LIST[5][1];
     }
 
-    public static function Get_Admin_Name():string {
+    public static function getAdminName():string {
         return self::LIST[5][0];
     }
 
-    public static function Get_Editor_ID():int {
+    public static function getEditorID():int {
         return 4;
     }
 
-    public static function Get_Editor_Flag():string {
+    public static function getEditorFlag():string {
         return self::LIST[4][1];
     }
 
-    public static function Get_Editor_Name():string {
+    public static function getEditorName():string {
         return self::LIST[4][0];
     }
 
-    public static function Get_Writer_ID():int {
+    public static function getWriterID():int {
         return 3;
     }
 
-    public static function Get_Writer_Flag():string {
+    public static function getWriterFlag():string {
         return self::LIST[3][1];
     }
 
-    public static function Get_Writer_Name():string {
+    public static function getWriterName():string {
         return self::LIST[3][0];
     }
 
-    public static function Get_Contributor_ID():int {
+    public static function getContributorID():int {
         return 2;
     }
 
-    public static function Get_Contributor_Flag():string {
+    public static function getContributorFlag():string {
         return self::LIST[2][1];
     }
 
-    public static function Get_Contributor_Name():string {
+    public static function getContributorName():string {
         return self::LIST[2][0];
     }
 
-    public static function Get_User_ID():int {
+    public static function getUserID():int {
         return 1;
     }
 
-    public static function Get_User_Flag():string {
+    public static function getUserFlag():string {
         return self::LIST[1][1];
     }
 
-    public static function Get_User_Name():string {
+    public static function getUserName():string {
         return self::LIST[1][0];
     }
 
-    public static function Get_Guest_ID():int {
+    public static function getGuestID():int {
         return 0;
     }
 
-    public static function Get_Guest_Flag():string {
+    public static function getGuestFlag():string {
         return self::LIST[0][1];
     }
 
-    public static function Get_Guest_Name():string {
+    public static function getGuestName():string {
         return self::LIST[0][0];
     }
 }
