@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.1.2 - 2022-02-07
+- @author correction
+
 ## 3.1.1 - 2021-10-13
 - namespace correction
 

@@ -4,7 +4,7 @@
  * 
  * Please report bugs on https://github.com/robertsaupe/phplogin/issues
  *
- * @__author Robert Saupe <mail@robertsaupe.de>
+ * @author Robert Saupe <mail@robertsaupe.de>
  * @copyright Copyright (c) 2018, Robert Saupe. All rights reserved
  * @link https://github.com/robertsaupe/phplogin
  * @license MIT License
